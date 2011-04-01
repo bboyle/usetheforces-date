@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Date input example</title>
+	<style type="text/css">
+		html {
+			background: silver;
+			color: black;
+			font: 100%/1.3 Verdana, sans-serif;
+		}
+		h1, h2, h3 {
+			font-family: 'Trebuchet MS', Arial, sans-serif;
+		}
+		body {
+			background: white;
+			margin: 3em;
+			border-radius: 1em;
+			border: 2px solid gray;
+			padding: 3em;
+		}
+
+		.ftw-questions,
+		.xf-input,
+		.xf-label,
+		.xf-hint {
+			display: block;
+			padding: 0;
+			margin: 0;
+		}
+		.xf-input {
+			position: relative;
+			padding: 2em;
+			margin: .5em 0;
+			border-radius: .5em;
+			background: #eee;
+		}
+		abbr.xf-required {
+			position: absolute;
+			margin-left: -1.5em;
+			color: red;
+			text-decoration: none;
+			border-bottom: none;
+		}
+
+		.datepicker table {
+			float: left;
+			margin-left: 1px;
+		}
+		table {
+			border-collapse: collapse;
+			border-bottom: 1px solid #333;
+		}
+		thead {
+			background: #333;
+			color: #fff;
+		}
+		tbody tr:nth-child(odd) {
+			background: #eee;
+		}
+		tbody tr:nth-child(even) {
+			background: #ddd;
+		}
+		th,
+		td {
+			padding: .5em;
+			width: 2em;
+			font-weight: normal;
+		}
+		td {
+			text-align: right;
+		}
+		td.prev,
+		td.next {
+			color: #777;
+		}
+		td.mark {
+			background: blue;
+			color: white;
+		}
+
+
+		#lightbox {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 100;
+			background: rgba(0, 0, 0, .5);
+		}
+		.tf-active {
+			z-index: 200;
+		}
+
+	</style>
+</head>
+<body>
+
+	<h1>Date input example</h1>
+
+	<form action="" method="get">
+		<ol class="ftw-questions">
+			
+			<li class="xf-input xsd-date tf-active">
+				<label for="date">
+					<span class="xf-label">Date</span>
+					<abbr title="required" class="xf-required">*</abbr>
+					<small class="xf-hint">example: 1 April 2011</small>
+				</label>
+				<input type="date" id="date" name="date" />
+				<div class="datepicker">
+					<table class="century">
+						<caption>1910—2010</caption>
+						<thead>
+							<tr>
+								<th colspan="2">Decades</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>1910</td>
+								<td>1920</td>
+							</tr>
+							<tr>
+								<td>1930</td>
+								<td>1940</td>
+							</tr>
+							<tr>
+								<td>1950</td>
+								<td>1960</td>
+							</tr>
+							<tr>
+								<td>1970</td>
+								<td>1980</td>
+							</tr>
+							<tr>
+								<td>1990</td>
+								<td>2000</td>
+							</tr>
+							<tr>
+								<td class="mark">2010</td>
+								<td>2020</td>
+							</tr>
+						</tbody>
+					</table>
+
+
+					<table class="month">
+						<caption>April 2011</caption>
+						<thead>
+							<tr>
+								<th scope="col" title="Sunday">Sun</th>
+								<th scope="col" title="Monday">Mon</th>
+								<th scope="col" title="Tuesday">Tues</th>
+								<th scope="col" title="Wedday">Wed</th>
+								<th scope="col" title="Thursday">Thurs</th>
+								<th scope="col" title="Friday">Fri</th>
+								<th scope="col" title="Saturday">Sat</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="prev">27</td>
+								<td class="prev">28</td>
+								<td class="prev">29</td>
+								<td class="prev">30</td>
+								<td class="prev">31</td>
+								<td>1</td>
+								<td class="mark">2</td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>4</td>
+								<td>5</td>
+								<td>6</td>
+								<td>7</td>
+								<td>8</td>
+								<td>9</td>
+							</tr>
+							<tr>
+								<td>10</td>
+								<td>11</td>
+								<td>12</td>
+								<td>13</td>
+								<td>14</td>
+								<td>15</td>
+								<td>16</td>
+							</tr>
+							<tr>
+								<td>17</td>
+								<td>18</td>
+								<td>19</td>
+								<td>20</td>
+								<td>21</td>
+								<td>22</td>
+								<td>23</td>
+							</tr>
+							<tr>
+								<td>24</td>
+								<td>25</td>
+								<td>26</td>
+								<td>27</td>
+								<td>28</td>
+								<td>29</td>
+								<td>30</td>
+							</tr>
+							<tr>
+								<td class="next">1</td>
+								<td class="next">2</td>
+								<td class="next">3</td>
+								<td class="next">4</td>
+								<td class="next">5</td>
+								<td class="next">6</td>
+								<td class="next">7</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</li>
+
+		</ol>
+	</form>
+
+	<div id="lightbox" />
+
+</body>
+</html>
