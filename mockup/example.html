@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="UTF-8" />
 	<title>Example form with date input</title>
+
 	<style type="text/css">
 		html {
 			background: silver;
@@ -15,6 +17,7 @@
 			background: white;
 			margin: 3em;
 			border-radius: 1em;
+			-moz-border-radius: 1em;
 			border: 2px solid gray;
 			padding: 3em;
 		}
@@ -27,11 +30,15 @@
 			padding: 0;
 			margin: 0;
 		}
+		.xf-hint {
+			color: #333;
+		}
 		.xf-input {
 			position: relative;
 			padding: 2em;
 			margin: .5em 0;
 			border-radius: .5em;
+			-moz-border-radius: .5em;
 			background: #eee;
 		}
 		abbr.xf-required {
@@ -42,9 +49,19 @@
 			border-bottom: none;
 		}
 
+		.datepicker {
+			position: absolute;
+			padding: 1.3em;
+			background: #eee;
+			margin-left: -1.3em;
+			border: 2px solid #333;
+			border-radius: 1em;
+			-moz-border-radius: 1em;
+		}
 		.datepicker table {
 			float: left;
 			margin-left: 1px;
+			cursor: pointer;
 		}
 		table {
 			border-collapse: collapse;
@@ -97,6 +114,7 @@
 		}
 
 	</style>
+
 </head>
 <body>
 
@@ -111,9 +129,10 @@
 					<abbr title="required" class="xf-required">*</abbr>
 					<small class="xf-hint">example: 1 April 2011</small>
 				</label>
-				<input type="date" id="date" name="date" />
+				<input type="date" id="date" name="date" value="2011-04-02" />
+				<time datetime="2011-02-04">Saturday 2 April 2011</time>
 				<div class="datepicker">
-					<table class="century">
+					<table class="century" style="display: none">
 						<caption>1910–2010</caption>
 						<thead>
 							<tr>
@@ -148,9 +167,80 @@
 						</tbody>
 					</table>
 
+					<table class="decade" style="display: none">
+						<caption>2010–2019</caption>
+						<thead>
+							<tr>
+								<th colspan="2">Years</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="prev">2009</td>
+								<td>2010</td>
+							</tr>
+							<tr>
+								<td class="mark">2011</td>
+								<td>2012</td>
+							</tr>
+							<tr>
+								<td>2013</td>
+								<td>2014</td>
+							</tr>
+							<tr>
+								<td>2015</td>
+								<td>2016</td>
+							</tr>
+							<tr>
+								<td>2017</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>2019</td>
+								<td class="next">2020</td>
+							</tr>
+							</tr>
+						</tbody>
+					</table>
+
+					<table class="year">
+						<caption>2011</caption>
+						<thead>
+							<tr>
+								<th colspan="2">Months</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td title="January 2011">Jan</td>
+								<td title="February 2011">Feb</td>
+							</tr>
+							<tr>
+								<td title="March 2011">Mar</td>
+								<td title="April 2011" class="mark">Apr</td>
+							</tr>
+							<tr>
+								<td title="May 2011">May</td>
+								<td title="June 2011">June</td>
+							</tr>
+							<tr>
+								<td title="July 2011">July</td>
+								<td title="August 2011">Aug</td>
+							</tr>
+							<tr>
+								<td title="September 2011">Sept</td>
+								<td title="October 2011">Oct</td>
+							</tr>
+							<tr>
+								<td title="November 2011">Nov</td>
+								<td title="December 2011">Dec</td>
+							</tr>
+							</tr>
+						</tbody>
+					</table>
 
 					<table class="month">
-						<caption>April 2011</caption>
+						<caption>◀ April 2011 ▶</caption>
 						<thead>
 							<tr>
 								<th scope="col" title="Sunday">Sun</th>
@@ -219,6 +309,7 @@
 							</tr>
 						</tbody>
 					</table>
+					<div class="tip">Tip: '<kbd>Ctrl+Page Up</kbd>' moves to the previous year</div>
 				</div>
 			</li>
 
@@ -226,6 +317,25 @@
 	</form>
 
 	<div id="lightbox" />
+
+	<script type="text/javascript" src="jquery-1.5.2.min.js"></script>
+	<script type="text/javascript" src="jquery.effects.core.js"></script>
+	<script type="text/javascript" src="jquery.effects.slide.js"></script>
+	<script type="text/javascript">
+
+		$('.datepicker caption').live('click', function(evt) {
+			var caption = $(evt.target);
+
+			var t1 = caption.closest('table');
+			var t2 = t1.prev('table');
+
+			if (t2.length) {
+				t2.show('slide');
+				t1.hide();
+			}
+		});
+
+	</script>
 
 </body>
 </html>
