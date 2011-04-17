@@ -22,34 +22,98 @@
 			padding: 3em;
 		}
 
-		.ftw-questions,
-		.xf-input,
-		.xf-label,
-		.xf-hint {
+
+		#lightbox {
+			display: none;
+			position: fixed;
+			margin: 0;
+			padding: 0;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 998;
+			background: rgba(0, 0, 0, .2);
+			color: rgba(255, 255, 255, 1);
+		}
+		#lightbox a {
+			display: block;
+			margin: 1em;
+			color: rgba(255, 255, 255, 1);
+			text-align: right;
+			text-decoration: none;
+		}
+		.active {
+			z-index: 999;
+		}
+
+
+		input,
+		select,
+		textarea {
+			font: inherit;
+			padding: .3em;
+		}
+		fieldset {
+			display: block;
+			border: none;
+			padding: 0;
+			margin: 0;
+		}
+
+		.questions,
+		.questions > *,
+		.label,
+		.alert,
+		.hint {
 			display: block;
 			padding: 0;
 			margin: 0;
 		}
-		.xf-hint {
+		.hint {
 			color: #333;
 		}
-		.xf-input {
+		.questions > * {
 			position: relative;
-			padding: 2em;
+			padding: 1em 2em;
 			margin: .5em 0;
+			border: 2px solid #eee;
 			border-radius: .5em;
 			-moz-border-radius: .5em;
 			background: #eee;
 		}
-		abbr.xf-required {
+		.active {
+			/*outline: 2px solid yellow;*/
+			border-color: #f3f3f3;
+			background: #f7f7f7;
+		}
+		.invalid {
+			border-color: red;
+		}
+
+		label > abbr,
+		legend > abbr {
 			position: absolute;
-			margin-left: -1.5em;
+			margin-left: -1em;
+			top: 1em;
 			color: red;
 			text-decoration: none;
 			border-bottom: none;
 		}
 
+
+		.choices,
+		.choices > * {
+			display: block;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+
+
 		.datepicker {
+			display: none;
+			z-index: 999;
 			position: absolute;
 			padding: 1.3em;
 			background: #eee;
@@ -65,9 +129,10 @@
 		}
 		table {
 			border-collapse: collapse;
-			border-bottom: 1px solid #333;
+			border-bottom: 2px solid #333;
 		}
-		thead {
+		thead,
+		th {
 			background: #333;
 			color: #fff;
 		}
@@ -100,19 +165,6 @@
 		}
 
 
-		#lightbox {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 100;
-			background: rgba(0, 0, 0, .5);
-		}
-		.tf-active {
-			z-index: 200;
-		}
-
 	</style>
 
 </head>
@@ -120,14 +172,34 @@
 
 	<h1>Example form with date input</h1>
 
-	<form action="" method="get">
-		<ol class="ftw-questions">
-			
-			<li class="xf-input xsd-date tf-active">
+	<form action="./" method="get">
+		<ol class="questions">
+
+			<li>
+				<label for="name">
+					<span class="label">Name</span>
+					<abbr title="required">*</abbr>
+				</label>
+				<input type="text" name="name" id="name" size="30" />
+			</li>
+
+
+			<li class="email invalid">
+				<label for="email">
+					<span class="label">Email</span>
+					<em class="alert">must be a valid email address</em>
+					<abbr title="required">*</abbr>
+					<small class="hint privacy">We will never share your email address</small>
+				</label>
+				<input type="email" name="email" id="email" size="40" value="fred" />
+			</li>
+
+
+			<li class="date">
 				<label for="date">
-					<span class="xf-label">Date</span>
-					<abbr title="required" class="xf-required">*</abbr>
-					<small class="xf-hint">example: 1 April 2011</small>
+					<span class="label">Date</span>
+					<abbr title="required">*</abbr>
+					<small class="hint">example: 1 April 2011</small>
 				</label>
 				<input type="date" id="date" name="date" value="2011-04-02" />
 				<time datetime="2011-02-04">Saturday 2 April 2011</time>
@@ -199,7 +271,6 @@
 								<td>2019</td>
 								<td class="next">2020</td>
 							</tr>
-							</tr>
 						</tbody>
 					</table>
 
@@ -235,7 +306,6 @@
 								<td title="November 2011">Nov</td>
 								<td title="December 2011">Dec</td>
 							</tr>
-							</tr>
 						</tbody>
 					</table>
 
@@ -243,6 +313,7 @@
 						<caption>◀ April 2011 ▶</caption>
 						<thead>
 							<tr>
+								<th scope="col">Week</th>
 								<th scope="col" title="Sunday">Sun</th>
 								<th scope="col" title="Monday">Mon</th>
 								<th scope="col" title="Tuesday">Tues</th>
@@ -254,6 +325,7 @@
 						</thead>
 						<tbody>
 							<tr>
+								<th scope="row" class="prev">13</th>
 								<td class="prev">27</td>
 								<td class="prev">28</td>
 								<td class="prev">29</td>
@@ -263,6 +335,7 @@
 								<td class="mark">2</td>
 							</tr>
 							<tr>
+								<th scope="row">14</th>
 								<td>3</td>
 								<td>4</td>
 								<td>5</td>
@@ -272,6 +345,7 @@
 								<td>9</td>
 							</tr>
 							<tr>
+								<th scope="row">15</th>
 								<td>10</td>
 								<td>11</td>
 								<td>12</td>
@@ -281,6 +355,7 @@
 								<td>16</td>
 							</tr>
 							<tr>
+								<th scope="row">16</th>
 								<td>17</td>
 								<td>18</td>
 								<td>19</td>
@@ -290,6 +365,7 @@
 								<td>23</td>
 							</tr>
 							<tr>
+								<th scope="row">17</th>
 								<td>24</td>
 								<td>25</td>
 								<td>26</td>
@@ -299,6 +375,7 @@
 								<td>30</td>
 							</tr>
 							<tr>
+								<th scope="row" class="next">18</th>
 								<td class="next">1</td>
 								<td class="next">2</td>
 								<td class="next">3</td>
@@ -313,15 +390,93 @@
 				</div>
 			</li>
 
+
+			<li>
+				<label for="subject">
+					<span class="label">Subject</span>
+					<abbr title="required">*</abbr>
+				</label>
+				<select name="subject" id="name">
+					<option value="">— please select —</option>
+					<option value="bug">Report a problem</option>
+					<option value="feature">Request a feature</option>
+					<option value="other">Other…</option>
+				</select>
+			</li>
+
+
+			<li>
+				<fieldset id="flavour">
+					<legend>
+						<span class="label">Flavour</span>
+						<abbr title="required">*</abbr>
+						<small class="hint">Select your favourite flavours</small>
+					</legend>
+					<ul class="choices">
+						<li><input type="checkbox" name="flavour" value="chocolate" id="flavour-chocolate" /><label for="flavour-chocolate">Chocolate</label></li>
+						<li><input type="checkbox" name="flavour" value="strawberry" id="flavour-strawberry" /><label for="flavour-strawberry">Strawberry</label></li>
+						<li><input type="checkbox" name="flavour" value="vanilla" id="flavour-vanilla" /><label for="flavour-vanilla">Vanilla</label></li>
+					</ul>
+				</fieldset>
+			</li>
+
+
+			<li>
+				<label for="comments">
+					<span class="label">Comments</span>
+					<abbr title="required">*</abbr>
+				</label>
+				<textarea name="comments" id="comments" rows="10" cols="30"></textarea>
+			</li>
+
+
+			<li class="footer">
+				<ul class="submit">
+					<li><strong><input type="submit" value="Send feedback" /></strong></li>
+					<li><input type="submit" value="Send later" /></li>
+					<li class="cancel"><a href="../">Cancel</a></li>
+				</ul>
+				<input type="hidden" name="dump" value="AB83893CDF80938" />
+			</li>
+
+
 		</ol>
 	</form>
 
-	<div id="lightbox" />
+	<div id="lightbox"><a href="#" title="close">╳</a></div>
 
 	<script type="text/javascript" src="jquery-1.5.2.min.js"></script>
 	<script type="text/javascript" src="jquery.effects.core.js"></script>
 	<script type="text/javascript" src="jquery.effects.slide.js"></script>
 	<script type="text/javascript">
+
+		$('#lightbox')
+			.live('click', function(evt) {
+				$(evt.target).slideUp(80);
+			})
+		;
+
+
+		$('form a,input,select,textarea')
+			.live('focus', function(evt) {
+				$(evt.target).parents('li').addClass('active');
+			})
+			.live('blur', function(evt) {
+				$(evt.target).parents('li').removeClass('active');
+			})
+		;
+
+
+		$('#date')
+			// TODO fix. blur on date input is triggered when interacting with datepicker
+			.live('blur', function(evt) {
+				$('#lightbox, .datepicker').hide();
+			})
+			.live('focus', function(evt) {
+				$('#lightbox').fadeIn(80);
+				$('.datepicker').slideDown(500);
+			})
+		;
 
 		$('.datepicker caption').live('click', function(evt) {
 			var caption = $(evt.target);
