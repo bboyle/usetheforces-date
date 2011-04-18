@@ -419,7 +419,7 @@
 					<span class="label">Subject</span>
 					<abbr title="required">*</abbr>
 				</label>
-				<select name="subject" id="name">
+				<select name="subject" id="name" required="required">
 					<option value="">— please select —</option>
 					<option value="bug">Report a problem</option>
 					<option value="feature">Request a feature</option>
@@ -478,6 +478,8 @@
 				$(evt.target).slideUp(80);
 			})
 		;
+
+		$('#name').get(0).setCustomValidity('must be "Fred Smith"');
 
 
 		$('form a,input,select,textarea')
